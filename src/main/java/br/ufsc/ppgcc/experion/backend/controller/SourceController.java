@@ -19,7 +19,7 @@ public class SourceController {
     SourceService service;
 
     @PostMapping("/sources/add")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public EvidenceSource addSource(
             String name,
             String url) {

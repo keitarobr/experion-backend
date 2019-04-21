@@ -23,7 +23,7 @@ public class InputController {
     InputService service;
 
     @PostMapping("/input/add")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public EvidenceSourceInput add(
             String name,
             String sourceName,
@@ -32,7 +32,7 @@ public class InputController {
     }
 
     @PostMapping("/input/add-multiple")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<EvidenceSourceInput> addMultiple(
             String name,
             String sourceName,
@@ -47,7 +47,7 @@ public class InputController {
     }
 
     @DeleteMapping("/input/delete-by-name")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public EvidenceSourceInput deleteByName(String name) {
         return service.deleteByName(name);
     }
@@ -59,7 +59,7 @@ public class InputController {
     }
 
     @GetMapping("/input/get-evidences")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('RESEARCHER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('RESEARCHER')")
     public Set<PhysicalEvidence> getEvidences(String inputName, String expertIdentification, String language) throws Exception {
         return service.getEvidences(inputName, expertIdentification, language);
     }

@@ -20,7 +20,7 @@ public class ProfileController {
     ProfileService service;
 
     @PostMapping("/profile/add-profile-builder")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ProfileBuilder addProfileBuilder(
             String name,
             String fullClassName) {
@@ -34,7 +34,7 @@ public class ProfileController {
     }
 
     @PostMapping("/profile/generate-profiles")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('RESEARCHER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('RESEARCHER')")
     public Set<Profile> generateProfiles(String expertIdentification, String builderName) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         return service.generateProfiles(expertIdentification, builderName);
     }

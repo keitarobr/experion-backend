@@ -20,7 +20,7 @@ public class ExpertiseController {
     private ExpertiseService service;
 
     @PostMapping("/expertise/add-expertise-builder")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ExpertiseBuilder addExpertiseBuilder(
             String name,
             String fullClassName) {
@@ -34,7 +34,7 @@ public class ExpertiseController {
     }
 
     @PostMapping("/expertise/generate-expertise")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('RESEARCHER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('RESEARCHER')")
     public Set<Expertise> generateExpertise(String expertIdentification, String builderName) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         return service.generateExpertise(expertIdentification, builderName);
     }

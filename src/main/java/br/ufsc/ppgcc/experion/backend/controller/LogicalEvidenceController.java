@@ -20,7 +20,7 @@ public class LogicalEvidenceController {
     private LogicalEvidenceService service;
 
     @PostMapping("/logical-evidence/add-logical-evidence-builder")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public LogicalEvidenceBuilder addLogicalEvidenceBuilder(
             String name,
             String fullClassName) {
@@ -40,7 +40,7 @@ public class LogicalEvidenceController {
     }
 
     @PostMapping("/logical-evidence/generate")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('RESEARCHER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('RESEARCHER')")
     public Set<LogicalEvidence> generateLogicalEvidences(
             String expertIdentification,
             String inputName,

@@ -18,7 +18,7 @@ public class ExpertController {
     private ExpertService service;
 
     @PostMapping("/expert/add-with-birthdate")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('RESEARCHER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('RESEARCHER')")
     public Expert addWithBirthdate(
             String name,
             String identification,
@@ -27,7 +27,7 @@ public class ExpertController {
     }
 
     @PostMapping("/expert/add")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('RESEARCHER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('RESEARCHER')")
     public Expert add(
             String name,
             String identification) {
@@ -53,19 +53,19 @@ public class ExpertController {
     }
 
     @PostMapping("/expert/add-expert-identification")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('RESEARCHER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('RESEARCHER')")
     public Expert addExpertIdentification(String expertIdentification, String sourceName, String identification) {
         return service.addExpertIdentification(expertIdentification, sourceName, identification);
     }
 
     @PostMapping("/expert/delete-expert-identification")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('RESEARCHER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('RESEARCHER')")
     public Expert deleteExpertIdentification(String expertIdentification, String sourceName, String identification) {
         return service.deleteExpertIdentification(expertIdentification, sourceName, identification);
     }
 
     @PostMapping("/expert/collect-evidences")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('RESEARCHER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('RESEARCHER')")
     public Set<PhysicalEvidence> collectEvidences(String expertIdentification, String inputName, String language) {
         Expert expert = service.getByIdentification(expertIdentification);
         return service.collectEvidences(expertIdentification, inputName, language);
@@ -78,13 +78,13 @@ public class ExpertController {
     }
 
     @GetMapping("/expert/list-all-collected-evidences")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public Set<PhysicalEvidence> listAllCollectedEvidences(String expertIdentification) {
         return service.listAllCollectedEvidences(expertIdentification);
     }
 
     @GetMapping("/expert/list-evidences-by-inputs")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public Set<PhysicalEvidence> listEvidencesByInputs(String expertIdentification, String[] inputNames) {
         return service.listEvidencesByInputs(expertIdentification, inputNames);
     }
